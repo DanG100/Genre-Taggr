@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+\.cache-anonymous314
+
+\.idea/
+
+*.mp3
