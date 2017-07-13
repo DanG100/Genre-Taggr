@@ -31,18 +31,21 @@ def findTrack(sp,path):
     song = EasyID3(path)
     id3_artist = song['artist'][0]
     id3_title = song['title'][0]
-    results = sp.search(q=id3_artist + ' ' + id3_title, type='track')
-    tracks = results['tracks']['items']
-    for track in tracks:
-        spot_title = track['name']
-        spot_artist = track['artists'][0]['name']
-        if id3_title == spot_title and id3_artist == spot_artist:
-            print("Found match")
-            writeGenre(sp,track,path)
-            break
-        else:
-            print("ID3 Artist: " + id3_artist + ", Spotify Artist: " + spot_artist)
-            print("ID3 Title: " + id3_title + ", Spotify Title: " + spot_title)
+    if song.get('genre', "") == "":
+        results = sp.search(q=id3_artist + ' ' + id3_title, type='track')
+        tracks = results['tracks']['items']
+        for track in tracks:
+            spot_title = track['name']
+            spot_artist = track['artists'][0]['name']
+            if id3_title == spot_title and id3_artist == spot_artist:
+                print("Found match")
+                writeGenre(sp,track,path)
+                break
+            else:
+                print("ID3 Artist: " + id3_artist + ", Spotify Artist: " + spot_artist)
+                print("ID3 Title: " + id3_title + ", Spotify Title: " + spot_title)
+    else:
+        print("Skipping track, already has genre info")
 
 
 if __name__ == '__main__':
@@ -54,7 +57,6 @@ if __name__ == '__main__':
         for filename in files:
             path = os.path.join(folder, filename)
             if path.endswith('.mp3'):
-                print(path)
                 findTrack(sp,path)
 
 
