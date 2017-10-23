@@ -1,9 +1,11 @@
 # Genre-Taggr
 
-Tries to find and tag songs genre, using Spotify API. Recurvisely scans the cwd for every mp3 file to find match.
+This script tries to find and write to the ID3 tag the song's genre, using Spotify API. It recurvisely scans the cwd for every mp3 file to identify the genre.
 
-### Install Dependicies
-  
+### Install Dependencies
+
+* Install python and pip
+* (Recommended) Add python to PATH variable, or equivalent for Mac and Linux
 ```
 pip install mutagen
 pip install spotipy
